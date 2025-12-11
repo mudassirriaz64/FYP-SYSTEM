@@ -1,0 +1,242 @@
+{
+  "project": {
+    "name": "FYP Management System",
+    "version": "1.0.0",
+    "description": "Final Year Project Management System with Admin, Coordinator, Student, Supervisor, HOD modules"
+  },
+  "systemRequirements": {
+    "nodejs": {
+      "version": ">=18.0.0",
+      "downloadUrl": "https://nodejs.org/",
+      "required": true
+    },
+    "dotnet": {
+      "version": ">=10.0.0",
+      "downloadUrl": "https://dotnet.microsoft.com/download",
+      "required": true
+    },
+    "sqlServer": {
+      "version": ">=2019",
+      "downloadUrl": "https://www.microsoft.com/sql-server/sql-server-downloads",
+      "required": true
+    },
+    "git": {
+      "version": "any",
+      "downloadUrl": "https://git-scm.com/",
+      "required": false
+    }
+  },
+  "frontend": {
+    "packageManager": "npm",
+    "directory": "fyp-frontend",
+    "dependencies": {
+      "lucide-react": "^0.556.0",
+      "react": "^19.2.0",
+      "react-dom": "^19.2.0",
+      "react-router-dom": "^7.10.1"
+    },
+    "devDependencies": {
+      "@eslint/js": "^9.39.1",
+      "@tailwindcss/vite": "^4.1.17",
+      "@types/react": "^19.2.5",
+      "@types/react-dom": "^19.2.3",
+      "@vitejs/plugin-react": "^5.1.1",
+      "eslint": "^9.39.1",
+      "eslint-plugin-react-hooks": "^7.0.1",
+      "eslint-plugin-react-refresh": "^0.4.24",
+      "globals": "^16.5.0",
+      "tailwindcss": "^4.1.17",
+      "vite": "^7.2.4"
+    },
+    "scripts": {
+      "dev": "vite",
+      "build": "vite build",
+      "preview": "vite preview",
+      "lint": "eslint ."
+    },
+    "port": 5173,
+    "apiBaseUrl": "http://localhost:5073/api"
+  },
+  "backend": {
+    "framework": "ASP.NET Core",
+    "targetFramework": "net10.0",
+    "directory": "fyp-backend/FYPSystem.API",
+    "nugetPackages": [
+      {
+        "name": "BCrypt.Net-Next",
+        "version": "4.0.3",
+        "purpose": "Password hashing"
+      },
+      {
+        "name": "ClosedXML",
+        "version": "0.104.2",
+        "purpose": "Excel file generation"
+      },
+      {
+        "name": "Microsoft.AspNetCore.Authentication.JwtBearer",
+        "version": "10.0.0",
+        "purpose": "JWT authentication"
+      },
+      {
+        "name": "Microsoft.AspNetCore.OpenApi",
+        "version": "10.0.0",
+        "purpose": "OpenAPI support"
+      },
+      {
+        "name": "Microsoft.EntityFrameworkCore.SqlServer",
+        "version": "10.0.0",
+        "purpose": "SQL Server database provider"
+      },
+      {
+        "name": "Microsoft.EntityFrameworkCore.Tools",
+        "version": "10.0.0",
+        "purpose": "Entity Framework migrations"
+      },
+      {
+        "name": "Swashbuckle.AspNetCore",
+        "version": "10.0.1",
+        "purpose": "Swagger/OpenAPI documentation"
+      }
+    ],
+    "port": 5073,
+    "database": {
+      "provider": "SQL Server",
+      "defaultDatabaseName": "FYPSystemDB",
+      "connectionStringTemplate": "Server=localhost;Database=FYPSystemDB;Trusted_Connection=True;TrustServerCertificate=True;"
+    },
+    "jwt": {
+      "keyLength": 32,
+      "issuer": "FYPSystem",
+      "audience": "FYPSystem"
+    }
+  },
+  "database": {
+    "migrations": [
+      "AddDepartmentsAndStaff",
+      "AddStudentsAndUpdateStaff",
+      "AddPasswordResetFieldsToUser",
+      "AddSystemSettingsAndDashboard",
+      "AddExternalEvaluatorTokens",
+      "AddNotificationFlags",
+      "AddFYPWorkflowModels",
+      "AddStudentCredentials",
+      "NullableNotificationCreator",
+      "AddFormBFieldsToProposal",
+      "AddCoordinatorFeatures",
+      "AddHODAndDocumentFeatures",
+      "FixEscalationFkDeleteBehavior"
+    ],
+    "tables": [
+      "Users",
+      "Departments",
+      "Staff",
+      "Students",
+      "SystemSettings",
+      "ExternalEvaluatorTokens",
+      "Notifications",
+      "FYPGroups",
+      "GroupMembers",
+      "Proposals",
+      "StudentFormSubmissions",
+      "Deadlines",
+      "Defenses",
+      "DefenseEvaluators",
+      "StudentDocuments",
+      "ProjectBudgets",
+      "MonthlyReports",
+      "Escalations"
+    ]
+  },
+  "modules": {
+    "admin": {
+      "status": "complete",
+      "pages": 6,
+      "controllers": 5
+    },
+    "coordinator": {
+      "status": "complete",
+      "pages": 6,
+      "controllers": 4
+    },
+    "student": {
+      "status": "complete",
+      "pages": 11,
+      "controllers": 2
+    },
+    "supervisor": {
+      "status": "complete",
+      "pages": 6,
+      "controllers": 1
+    },
+    "hod": {
+      "status": "complete",
+      "pages": 6,
+      "controllers": 1
+    },
+    "committee": {
+      "status": "pending"
+    },
+    "finance": {
+      "status": "pending"
+    }
+  },
+  "installation": {
+    "steps": [
+      {
+        "order": 1,
+        "action": "Install Node.js dependencies",
+        "command": "cd fyp-frontend && npm install",
+        "description": "Install all frontend packages"
+      },
+      {
+        "order": 2,
+        "action": "Restore .NET packages",
+        "command": "cd fyp-backend/FYPSystem.API && dotnet restore",
+        "description": "Restore all NuGet packages"
+      },
+      {
+        "order": 3,
+        "action": "Configure database connection",
+        "command": "Edit appsettings.json",
+        "description": "Update connection string with SQL Server details"
+      },
+      {
+        "order": 4,
+        "action": "Apply database migrations",
+        "command": "cd fyp-backend/FYPSystem.API && dotnet ef database update",
+        "description": "Create database schema"
+      },
+      {
+        "order": 5,
+        "action": "Start backend server",
+        "command": "cd fyp-backend/FYPSystem.API && dotnet run",
+        "description": "Run API server on http://localhost:5073"
+      },
+      {
+        "order": 6,
+        "action": "Start frontend server",
+        "command": "cd fyp-frontend && npm run dev",
+        "description": "Run React app on http://localhost:5173"
+      }
+    ]
+  },
+  "configuration": {
+    "frontend": {
+      "apiBaseUrl": "http://localhost:5073/api",
+      "configFile": "fyp-frontend/src/utils/api.js"
+    },
+    "backend": {
+      "configFile": "fyp-backend/FYPSystem.API/appsettings.json",
+      "corsOrigins": [
+        "http://localhost:5173",
+        "http://localhost:3000"
+      ]
+    }
+  },
+  "ports": {
+    "backend": 5073,
+    "frontend": 5173,
+    "swagger": "http://localhost:5073/swagger"
+  }
+}
+

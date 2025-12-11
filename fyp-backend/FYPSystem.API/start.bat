@@ -1,0 +1,3 @@
+@echo off
+echo Starting FYP Backend API...
+dotnet run
