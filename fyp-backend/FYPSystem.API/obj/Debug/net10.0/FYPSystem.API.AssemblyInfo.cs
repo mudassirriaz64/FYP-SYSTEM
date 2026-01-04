@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FYPSystem.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be990f8048efbe48455a40ccdf44fa44fdaf8561")]
 [assembly: System.Reflection.AssemblyProductAttribute("FYPSystem.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FYPSystem.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
